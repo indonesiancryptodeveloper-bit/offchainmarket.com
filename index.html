@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offchain Market - Turbo USD (USDTB)</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .btn-wa {
+            background-color: #25D366;
+            transition: all 0.3s ease;
+        }
+        .btn-wa:hover {
+            background-color: #128C7E;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-800 antialiased">
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-circle-nodes text-indigo-600 text-2xl"></i>
+                <span class="font-bold text-xl tracking-tight text-slate-900">Offchain<span class="text-indigo-600">Market</span></span>
+            </div>
+            <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
+                <a href="#rates" class="hover:text-indigo-600 transition">Paritas Aset</a>
+                <a href="#transaction" class="hover:text-indigo-600 transition">Simulasi Transaksi</a>
+                <a href="#payment" class="hover:text-indigo-600 transition">Alamat Pembayaran</a>
+                <a href="#rdn" class="hover:text-indigo-600 transition">Investasi & RDN</a>
+            </div>
+            <div>
+                <a href="https://wa.me/6281328416222" target="_blank" class="bg-slate-900 text-white text-sm px-4 py-2 rounded-lg hover:bg-indigo-600 transition shadow-sm">
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-gradient text-white py-20 px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500/20 text-indigo-300 px-3 py-1 rounded-full text-xs font-semibold tracking-wide border border-indigo-500/30">
+                Layanan Keuangan & Likuiditas OTC
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold mt-6 tracking-tight leading-none">
+                Platform Transaksi Aset Digital <span class="text-indigo-400">Offchain</span>
+            </h1>
+            <p class="mt-4 text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                Kelola likuiditas USDTB dan nikmati layanan konversi 1:1 serta peluang investasi yang aman dan transparan melalui jaringan terdesentralisasi.
+            </p>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 space-y-8" id="transaction">
+            <div class="glass-card rounded-2xl p-8 shadow-sm">
+                <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center">
+                    <i class="fa-solid fa-calculator text-indigo-600 mr-3"></i> Simulasi Transaksi USDTB (Offchain)
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Pilih Aset</label>
+                        <select id="assetType" class="w-full border-slate-200 rounded-lg p-3 bg-slate-50 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                            <option value="USDTB">USDTB (Turbo USD)</option>
+                            <option value="USDT">USDT (Tether)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-2">Jumlah (Qty)</label>
+                        <input type="number" id="amount" value="1000" class="w-full border border-slate-200 rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="0">
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-50/50 rounded-xl p-5 border border-indigo-100/50 mb-6 flex items-center justify-between">
+                    <div>
+                        <span class="text-sm font-medium text-slate-500">Nilai Konversi Estimasi (1:1)</span>
+                        <div class="text-2xl font-bold text-slate-900 mt-1" id="convertedValue">$ 1,000.00 USD</div>
+                    </div>
+                    <i class="fa-solid fa-right-left text-indigo-400 text-2xl"></i>
+                </div>
+
+                <button onclick="simulateTransaction()" class="w-full bg-indigo-600 text-white p-4 rounded-xl font-semibold hover:bg-indigo-700 transition shadow-sm">
+                    Lakukan Simulasi Order
+                </button>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 shadow-sm" id="rates">
+                <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                    <i class="fa-solid fa-file-contract text-indigo-600 mr-3"></i> Informasi Kontrak Resmi
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600 border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200">
+                                <th class="p-4 font-semibold">Nama Token</th>
+                                <th class="p-4 font-semibold">Jaringan</th>
+                                <th class="p-4 font-semibold">Alamat Kontrak</th>
+                                <th class="p-4 font-semibold">Desimal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50">
+                                <td class="p-4 font-medium text-slate-900">USDTB</td>
+                                <td class="p-4"><span class="bg-slate-200/80 text-slate-800 px-2 py-1 rounded-md text-xs">BEP-20</span></td>
+                                <td class="p-4 font-mono text-xs text-indigo-600">0xaA17b21dD19C8e8E5D4fF74DDe2A417884BF334d</td>
+                                <td class="p-4">6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-8">
+            <div class="glass-card rounded-2xl p-8 shadow-sm flex flex-col items-center text-center" id="payment">
+                <div class="w-12 h-12 bg-indigo-50 rounded-full flex items-center justify-center mb-4 text-indigo-600">
+                    <i class="fa-solid fa-wallet text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900">Alamat Wallet Pintu</h3>
+                <p class="text-sm text-slate-500 mt-1 mb-6">Pastikan jaringan yang digunakan adalah BNB Smart Chain (BEP-20)</p>
+                
+                <div class="bg-white p-4 border border-slate-200 rounded-xl shadow-sm mb-6">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=0x61C0604221ae4755DEeed46d03A154230c0D41c2" alt="QR Code Pintu Wallet" class="w-40 h-40 mx-auto">
+                </div>
+
+                <p class="text-xs text-slate-500 mb-2">Alamat Wallet USDT Anda</p>
+                <div class="flex items-center bg-slate-50 border border-slate-200 rounded-lg p-2 w-full max-w-xs mb-6">
+                    <span class="font-mono text-xs text-slate-600 truncate mr-2" id="walletAddr">0x61C0604221ae4755DEeed46d03A154230c0D41c2</span>
+                    <button onclick="copyAddress()" class="text-indigo-600 hover:text-indigo-800">
+                        <i class="fa-regular fa-copy"></i>
+                    </button>
+                </div>
+
+                <a href="https://wa.me/6281328416222?text=Halo%20Admin,%20saya%20telah%20melakukan%20transaksi%20Offchain.%20Berikut%20bukti%20pembayarannya." 
+                   target="_blank" 
+                   class="btn-wa w-full text-white py-3 px-4 rounded-xl font-semibold flex items-center justify-center space-x-2 shadow-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Konfirmasi via WhatsApp</span>
+                </a>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 shadow-sm" id="rdn">
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-piggy-bank"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Tertarik Investasi?</h3>
+                        <p class="text-xs text-slate-500">Deposit melalui RDN Bank BCA</p>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-xl p-6 shadow-inner mb-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <span class="text-xs tracking-wider text-slate-400 uppercase">Rekening Dana Nasabah (RDN)</span>
+                            <div class="text-xl font-bold tracking-wide mt-1">AZHAR</div>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-indigo-400 font-semibold">BCA</span>
+                            <div class="text-xs text-slate-400">Pendidikan/Aset</div>
+                        </div>
+                    </div>
+                    <div class="font-mono text-2xl tracking-wider mb-2">5401 5759 11</div>
+                    <div class="text-xs text-slate-400 flex items-center">
+                        <i class="fa-solid fa-circle text-emerald-500 text-xs mr-2 animate-pulse"></i>
+                        Akun Resmi Terverifikasi
+                    </div>
+                </div>
+
+                <button onclick="copyRDN()" class="w-full border border-slate-200 text-slate-700 py-3 px-4 rounded-xl font-semibold hover:bg-slate-50 transition flex items-center justify-center space-x-2">
+                    <i class="fa-regular fa-copy"></i>
+                    <span id="rdnCopyText">Salin Nomor Rekening</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-slate-100 py-8 text-center text-xs text-slate-500 mt-12">
+        &copy; 2026 Offchain Market. All rights reserved. Powered by BNB Smart Chain.
+    </footer>
+
+    <script>
+        function simulateTransaction() {
+            const amount = document.getElementById('amount').value;
+            const assetType = document.getElementById('assetType').value;
+            const converted = document.getElementById('convertedValue');
+
+            // Hitung estimasi konversi 1:1
+            if (amount > 0) {
+                converted.innerText = `$ ${Number(amount).toLocaleString('en-US', { minimumFractionDigits: 2 })} USD`;
+                alert(`Simulasi berhasil! Order offchain untuk ${amount} ${assetType} telah disimulasikan.`);
+            } else {
+                alert('Silakan masukkan jumlah yang valid.');
+            }
+        }
+
+        function copyAddress() {
+            const address = "0x61C0604221ae4755DEeed46d03A154230c0D41c2";
+            navigator.clipboard.writeText(address);
+            alert('Alamat wallet berhasil disalin!');
+        }
+
+        function copyRDN() {
+            const rdn = "5401575911";
+            navigator.clipboard.writeText(rdn);
+            const textEl = document.getElementById('rdnCopyText');
+            textEl.innerText = 'Nomor Rekening Berhasil Disalin!';
+            setTimeout(() => {
+                textEl.innerText = 'Salin Nomor Rekening';
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
